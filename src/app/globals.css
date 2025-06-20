@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@theme {
+    --color-red: #9a2823;
+    --color-yellow: #fbc510;
+}
+
+button {
+    cursor: pointer;
+}
+
+@layer components {
+    /* Khusus untuk webkit (Chrome, Safari, Edge) */
+    .thin-scroll::-webkit-scrollbar {
+        height: 0.1px; /* ketebalan horizontal scrollbar */
+    }
+    .thin-scroll::-webkit-scrollbar-track {
+        background: transparent; /* bg-gray-300 */
+    }
+    .thin-scroll::-webkit-scrollbar-thumb {
+        background-color: var(--color-gray-300); /* bg-gray-500 */
+        border-radius: 9999px; /* rounded-full */
+        border: 1px solid var(--color-gray-300); /* opsional, agar thumb ada jarak ke track */
+    }
+
+    /* Untuk Firefox */
+    .thin-scroll {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-gray-300) transparent;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.animate-slide-in {
+    animation: slide-in 0.4s ease-out forwards;
+}
+
+@keyframes progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+.animate-progress {
+    animation: progress 6s linear forwards;
+}
+
+@layer components {
+    .card {
+        @apply bg-white w-11/12 mx-auto rounded border border-gray-300 shadow p-7 flex flex-col gap-y-3;
+    }
+}
