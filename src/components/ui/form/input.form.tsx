@@ -35,7 +35,13 @@ export function InputForm({
             <label htmlFor={name} className="text-xs font-bold uppercase text-gray-700">
                 {title || name} {required && <sup className="text-red ms-2">*required</sup>}
             </label>
-            <div className={twMerge("w-full border border-gray-300 rounded-lg overflow-hidden relative", className)}>
+            <div
+                className={twMerge(
+                    "w-full border border-gray-300 rounded-lg overflow-hidden relative",
+                    className,
+                    error && "border-red"
+                )}
+            >
                 <input
                     type={type}
                     className="bg-gray-100 px-3 py-2 text-sm text-black placeholder:text-black/30 outline-none w-full disabled:opacity-60 disabled:cursor-not-allowed"

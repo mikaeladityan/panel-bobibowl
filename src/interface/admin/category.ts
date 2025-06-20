@@ -1,16 +1,14 @@
 export type CategoryReqDTO = {
     slug: string;
     title: string;
-    description?: string | undefined;
+    description?: string | null;
 };
 
 export type CategoryResDTO = {
     title: string;
     slug: string;
     description: string | null;
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date | null;
+    deleted_at?: Date | null;
 };
 
 export type CategoriesResDTO = Array<CategoryResDTO>;

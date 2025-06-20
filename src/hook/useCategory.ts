@@ -1,5 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+"use client";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { SetStateAction } from "jotai";
 import { useSetAtom } from "jotai";
+import React, { useState } from "react";
 import { CategoryReqDTO, CategoryResDTO } from "~/interface/admin/category";
 import { fetchError, ResponseError } from "~/lib/util/error";
 import { CategoryService } from "~/service/admin/category";
@@ -18,10 +21,10 @@ export function useCategory(deleted: boolean, slug?: string) {
     });
 
     const {
-        data: categoriesDeleted,
-        isLoading: isLoadingCategoriesDeleted,
-        isFetching: isFetchingCategoriesDeleted,
-        isRefetching: isRefetchingCategoriesDeleted,
+        data: categoryDeleted,
+        isLoading: isLoadingCategoryDeleted,
+        isFetching: isFetchingCategoryDeleted,
+        isRefetching: isRefetchingCategorCDeleted,
     } = useQuery({
         queryKey: ["categories", "deleted"],
         queryFn: CategoryService.listDeleted,
@@ -40,22 +43,24 @@ export function useCategory(deleted: boolean, slug?: string) {
     });
 
     return {
-        category,
         categories,
-        categoriesDeleted,
-        isLoadingCategory,
+        categoryDeleted,
+        category,
         isLoadingCategories,
-        isLoadingCategoriesDeleted,
+        isLoadingCategory,
+        isLoadingCategoryDeleted,
         isFetchingCategory,
         isFetchingCategories,
-        isFetchingCategoriesDeleted,
+        isFetchingCategoryDeleted,
         isRefetchingCategory,
         isRefetchingCategories,
-        isRefetchingCategoriesDeleted,
+        isRefetchingCategorCDeleted,
     };
 }
 
-export function useForm(slug?: string) {
+export function useForm(setBody?: React.Dispatch<SetStateAction<CategoryReqDTO>>, slug?: string) {
+    const queryClient = useQueryClient();
+    const [errors, setErrors] = useState<Array<{ path: string; message: string }>>([]);
     const setError = useSetAtom(errorAtom);
     const setNotification = useSetAtom(notificationAtom);
     const { mutateAsync: handleCreate, isPending: isPendingCreate } = useMutation<
@@ -66,10 +71,16 @@ export function useForm(slug?: string) {
         mutationKey: ["category", "create"],
         mutationFn: (body) => CategoryService.create(body),
         onSuccess: () => {
-            setNotification({ title: "Create New Category", message: "Successfully created new Category" });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            setNotification({ title: "Create New Category", message: "Successfully created new category" });
+            setBody!({
+                slug: "",
+                title: "",
+            });
         },
         onError: (err) => {
             fetchError(err, setError);
+            setErrors(err.response.data.errors ? err.response.data.errors : []);
         },
     });
 
@@ -81,7 +92,10 @@ export function useForm(slug?: string) {
         mutationKey: ["category", "update", slug],
         mutationFn: (body) => CategoryService.update(body, slug!),
         onSuccess: () => {
-            setNotification({ title: "Update Category", message: "Successfully updated Category" });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            queryClient.invalidateQueries({ queryKey: ["categories", "deleted"] });
+            queryClient.invalidateQueries({ queryKey: ["category", slug] });
+            setNotification({ title: "Update Category", message: "Successfully updated category" });
         },
         onError: (err) => {
             fetchError(err, setError);
@@ -92,24 +106,35 @@ export function useForm(slug?: string) {
         mutationKey: ["category", "clean"],
         mutationFn: CategoryService.clean,
         onSuccess: () => {
-            setNotification({ title: "Clean Category", message: "Successfully to clean Category storage" });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            setNotification({ title: "Clean category", message: "Successfully to clean category storage" });
         },
         onError: (err) => {
             fetchError(err, setError);
         },
     });
 
-    return { handleCreate, handleUpdate, handleClean, isPendingCreate, isPendingUpdate, isPendingClean };
+    return { handleCreate, handleUpdate, handleClean, isPendingCreate, isPendingUpdate, isPendingClean, errors };
 }
 
-export function useStatus(slug?: string) {
+export function useStatus(
+    setModal: React.Dispatch<SetStateAction<"DELETE" | "ACTIVE" | null>>,
+    setSelectedSlug: React.Dispatch<SetStateAction<string | null>>,
+    slug?: string
+) {
+    const queryClient = useQueryClient();
     const setError = useSetAtom(errorAtom);
     const setNotification = useSetAtom(notificationAtom);
     const { mutateAsync: handleDeleted, isPending: isPendingDeleted } = useMutation<unknown, ResponseError>({
         mutationKey: ["category", "deleted"],
         mutationFn: () => CategoryService.softDeleted(slug!),
         onSuccess: () => {
-            setNotification({ title: "Deleted Category", message: "Successfully to delete Category" });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            queryClient.invalidateQueries({ queryKey: ["categories", "deleted"] });
+            queryClient.invalidateQueries({ queryKey: ["category", slug] });
+            setNotification({ title: "Deleted category", message: "Successfully to delete category" });
+            setModal(null);
+            setSelectedSlug(null);
         },
         onError: (err) => {
             fetchError(err, setError);
@@ -120,7 +145,12 @@ export function useStatus(slug?: string) {
         mutationKey: ["category", "actived"],
         mutationFn: () => CategoryService.actived(slug!),
         onSuccess: () => {
-            setNotification({ title: "Actived Category", message: "Successfully to actived Category" });
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            queryClient.invalidateQueries({ queryKey: ["categories", "deleted"] });
+            queryClient.invalidateQueries({ queryKey: ["category", slug] });
+            setNotification({ title: "Actived category", message: "Successfully to actived category" });
+            setModal(null);
+            setSelectedSlug(null);
         },
         onError: (err) => {
             fetchError(err, setError);

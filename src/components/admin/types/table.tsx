@@ -1,11 +1,18 @@
 import { IconEye, IconSettings, IconTrash } from "@tabler/icons-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { SkeletonTable } from "~/components/ui/skeleton.table";
 import { useType } from "~/hook/useType";
 import { DeleteTypes } from "./delete";
+import { SetStateAction } from "jotai";
 
-export function TypeTable({ search }: { search: string }) {
+export function TypeTable({
+    search,
+    setUpdated,
+}: {
+    search: string;
+    setUpdated: React.Dispatch<SetStateAction<string | null>>;
+}) {
     const { types, isLoadingTypes, isFetchingTypes, isRefetchingTypes } = useType(false);
 
     const filtered = types?.filter(
@@ -48,7 +55,11 @@ export function TypeTable({ search }: { search: string }) {
                                   <td className="px-4 py-3 text-sm text-gray-800">{t.title}</td>
                                   <td className="px-4 py-3 text-sm text-gray-600">{t.slug}</td>
                                   <td className="px-4 py-3 flex items-center justify-center space-x-2">
-                                      <Button type="button" className="px-2 w-fit bg-sky-800 py-2">
+                                      <Button
+                                          onClick={() => setUpdated(t.slug)}
+                                          type="button"
+                                          className="px-2 w-fit bg-sky-800 py-2"
+                                      >
                                           <IconEye size={16} />
                                       </Button>
                                       <Button type="button" className="px-2 w-fit py-2">

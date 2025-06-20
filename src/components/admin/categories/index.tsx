@@ -3,18 +3,19 @@ import { useState } from "react";
 import { IconActivity, IconDatabaseSearch, IconSearch, IconTrash } from "@tabler/icons-react";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-import { TypeCreate } from "./create";
-import { TypeTable } from "./table";
-import { TypeTableDeleted } from "./table.deleted";
+import { CategoryCreate } from "./create";
+import { CategoryTable } from "./table";
+
 import { twMerge } from "tailwind-merge";
 
 import { useAtom } from "jotai";
 import { contentAtom } from "~/store";
-import { useForm } from "~/hook/useType";
+import { useForm } from "~/hook/useCategory";
 import { ButtonLoader } from "~/components/ui/button/button.loader";
-import { TypeUpdate } from "./update";
+import { CategoryUpdate } from "./update";
+import { CategoryTableDeleted } from "./table.deleted";
 
-export function AdminType() {
+export function AdminCategories() {
     const [search, setSearch] = useState("");
     const [content, setContent] = useAtom(contentAtom);
     const [updated, setUpdated] = useState<string | null>(null);
@@ -34,7 +35,7 @@ export function AdminType() {
                 )}
             >
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xs font-bold text-gray-500 uppercase">Types Data</h2>
+                    <h2 className="text-xs font-bold text-gray-500 uppercase">Categories Data</h2>
                     <div className="flex items-center justify-end gap-3">
                         {content === "DELETED" && (
                             <Button
@@ -76,16 +77,16 @@ export function AdminType() {
 
                 <div className="overflow-x-auto">
                     {content === "ACTIVED" ? (
-                        <TypeTable setUpdated={setUpdated} search={search} />
+                        <CategoryTable setUpdated={setUpdated} search={search} />
                     ) : (
-                        <TypeTableDeleted search={search} />
+                        <CategoryTableDeleted search={search} />
                     )}
                 </div>
             </Card>
 
             {/* Create Section */}
             <Card className="p-6">
-                {updated ? <TypeUpdate slug={updated} setUpdated={setUpdated} /> : <TypeCreate />}
+                {updated ? <CategoryUpdate slug={updated} setUpdated={setUpdated} /> : <CategoryCreate />}
             </Card>
         </section>
     );

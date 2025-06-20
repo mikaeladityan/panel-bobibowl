@@ -2,14 +2,14 @@
 import {
     IconCategoryPlus,
     IconGift,
-    IconHammer,
     IconHeartHandshake,
     IconHome2,
-    IconReportAnalytics,
     IconSpeakerphone,
     IconX,
     IconLogout,
     IconSettings,
+    IconLockAccess,
+    IconUsers,
 } from "@tabler/icons-react";
 import { useSetAtom } from "jotai";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,8 +28,8 @@ const sidebarMenu: Menu[] = [
     },
     {
         icon: <IconGift size={28} stroke={1.5} />,
-        title: "Product",
-        link: "/admin/products",
+        title: "Menu",
+        link: "/admin/menus",
     },
     {
         icon: <IconSpeakerphone size={28} stroke={1.5} />,
@@ -38,22 +38,22 @@ const sidebarMenu: Menu[] = [
     },
     {
         icon: <IconHeartHandshake size={28} stroke={1.5} />,
-        title: "Layanan",
-        link: "/admin/services",
+        title: "Types",
+        link: "/admin/types",
     },
     {
         icon: <IconCategoryPlus size={28} stroke={1.5} />,
-        title: "Kategori",
+        title: "Categories",
         link: "/admin/categories",
     },
     {
-        icon: <IconHammer size={28} stroke={1.5} />,
-        title: "Komponen",
-        link: "/admin/components",
+        icon: <IconUsers size={28} stroke={1.5} />,
+        title: "Users",
+        link: "/admin/users",
     },
     {
-        icon: <IconReportAnalytics size={28} stroke={1.5} />,
-        title: "Laporan",
+        icon: <IconLockAccess size={28} stroke={1.5} />,
+        title: "Reports",
         link: "/admin/reports",
     },
 ];
@@ -131,7 +131,8 @@ export function Sidebar({ account }: { account: AccountResDTO | undefined }) {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => navigate(menu.link)}
                         type="button"
-                        className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 ${
+                        disabled={menu.title === "Reports"}
+                        className={`w-full flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:scale-100 ${
                             activeLink === menu.link ? "bg-red text-white shadow-lg" : "text-red/90 hover:bg-red/10"
                         }`}
                     >

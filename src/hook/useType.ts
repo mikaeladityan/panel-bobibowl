@@ -85,6 +85,7 @@ export function useForm(setBody?: React.Dispatch<SetStateAction<TypeReqDTO>>, sl
         mutationFn: (body) => TypeService.update(body, slug!),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["types"] });
+            queryClient.invalidateQueries({ queryKey: ["types", "deleted"] });
             queryClient.invalidateQueries({ queryKey: ["type", slug] });
             setNotification({ title: "Update Type", message: "Successfully updated type" });
         },
@@ -121,6 +122,7 @@ export function useStatus(
         mutationFn: () => TypeService.softDeleted(slug!),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["types"] });
+            queryClient.invalidateQueries({ queryKey: ["types", "deleted"] });
             queryClient.invalidateQueries({ queryKey: ["type", slug] });
             setNotification({ title: "Deleted Type", message: "Successfully to delete type" });
             setModal(null);
@@ -136,6 +138,7 @@ export function useStatus(
         mutationFn: () => TypeService.actived(slug!),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["types"] });
+            queryClient.invalidateQueries({ queryKey: ["types", "deleted"] });
             queryClient.invalidateQueries({ queryKey: ["type", slug] });
             setNotification({ title: "Actived Type", message: "Successfully to actived type" });
             setModal(null);

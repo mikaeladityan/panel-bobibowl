@@ -2,14 +2,15 @@ import { IconCheck, IconSettings } from "@tabler/icons-react";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { SkeletonTable } from "~/components/ui/skeleton.table";
-import { useType } from "~/hook/useType";
+import { useCategory } from "~/hook/useCategory";
 import { formatDate } from "~/lib/util/date";
-import { ActiveTypes } from "./active";
+import { ActiveCategory } from "./active";
 
-export function TypeTableDeleted({ search }: { search: string }) {
-    const { typesDeleted, isLoadingTypeDeleted, isFetchingTypeDeleted, isRefetchingTypeDeleted } = useType(true);
+export function CategoryTableDeleted({ search }: { search: string }) {
+    const { categoryDeleted, isLoadingCategoryDeleted, isFetchingCategoryDeleted, isRefetchingCategorCDeleted } =
+        useCategory(true);
 
-    const filtered = typesDeleted?.filter(
+    const filtered = categoryDeleted?.filter(
         (t) =>
             t.title.toLowerCase().includes(search.toLowerCase()) || t.slug.toLowerCase().includes(search.toLowerCase())
     );
@@ -30,7 +31,7 @@ export function TypeTableDeleted({ search }: { search: string }) {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {isLoadingTypeDeleted || isFetchingTypeDeleted || isRefetchingTypeDeleted
+                    {isLoadingCategoryDeleted || isFetchingCategoryDeleted || isRefetchingCategorCDeleted
                         ? Array.from({ length: 5 }).map((_, idx) => (
                               <tr key={idx} className="animate-pulse">
                                   <td className="px-4 py-3">
@@ -69,16 +70,18 @@ export function TypeTableDeleted({ search }: { search: string }) {
                               </tr>
                           ))}
 
-                    {!isLoadingTypeDeleted && filtered?.length === 0 && (
+                    {!isLoadingCategoryDeleted && filtered?.length === 0 && (
                         <tr>
-                            <td colSpan={3} className="px-4 py-6 text-center text-sm text-gray-500">
+                            <td colSpan={4} className="px-4 py-6 text-center text-sm text-gray-500">
                                 No types found.
                             </td>
                         </tr>
                     )}
                 </tbody>
             </table>
-            {modal === "ACTIVE" && <ActiveTypes setModal={setModal} setSelectSlug={setSelectSlug} slug={selectSlug} />}
+            {modal === "ACTIVE" && (
+                <ActiveCategory setModal={setModal} setSelectSlug={setSelectSlug} slug={selectSlug} />
+            )}
         </>
     );
 }

@@ -37,6 +37,6 @@ export class CategoryService {
     }
 
     static async clean() {
-        await api.delete(`/admin/category`);
+        await api.delete(`/admin/category/clean`);
     }
 }
