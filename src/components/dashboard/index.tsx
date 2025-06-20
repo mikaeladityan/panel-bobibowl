@@ -31,7 +31,7 @@ export function Dashboard() {
                     isFetchingAccount={isFetchAccount}
                     isRefetchingAccount={isRefetchingAccount}
                 />
-                <main>
+                <main className="p-5">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus molestias eaque illo ex tempore
                     non a cupiditate, ratione nostrum nobis, corporis rerum eum rem vel veniam quo amet, voluptatibus
                     ducimus.

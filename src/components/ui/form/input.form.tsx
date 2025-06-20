@@ -1,4 +1,5 @@
 // components/ui/form/input.form.tsx
+import { IconAlertCircle } from "@tabler/icons-react";
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -13,6 +14,7 @@ type PropsInputForm = {
     required?: boolean;
     onFocus?: boolean;
     placeholder?: string;
+    error?: string;
 };
 
 export function InputForm({
@@ -26,6 +28,7 @@ export function InputForm({
     required,
     onFocus,
     placeholder,
+    error,
 }: PropsInputForm) {
     return (
         <div className="w-full">
@@ -35,7 +38,7 @@ export function InputForm({
             <div className={twMerge("w-full border border-gray-300 rounded-lg overflow-hidden relative", className)}>
                 <input
                     type={type}
-                    className="bg-gray-100 px-3 py-2 text-sm text-black placeholder:text-black/30 outline-none w-full"
+                    className="bg-gray-100 px-3 py-2 text-sm text-black placeholder:text-black/30 outline-none w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     name={name}
                     value={value}
                     onChange={onChange}
@@ -45,6 +48,12 @@ export function InputForm({
                     disabled={disabled}
                 />
             </div>
+            {error && (
+                <p className="text-red text-xs mt-1 flex items-center justify-start gap-2">
+                    <IconAlertCircle size={14} stroke={2} />
+                    <span>{error}</span>
+                </p>
+            )}
         </div>
     );
 }

@@ -33,3 +33,4 @@ export const setNotificationAtom = atom(
 );
 
 export const sidebarAtom = atomWithStorage<boolean>("sidebarConfig", false);
+export const contentAtom = atomWithStorage<"ACTIVED" | "DELETED">("content", "ACTIVED");
