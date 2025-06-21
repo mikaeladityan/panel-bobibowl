@@ -4,6 +4,7 @@ export type TypeReqDTO = {
 };
 
 export type TypeResDTO = {
+    id: number;
     title: string;
     slug: string;
     deleted_at?: Date | null;

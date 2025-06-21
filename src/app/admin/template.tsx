@@ -22,7 +22,7 @@ export default function AdminTemplate({ children }: { children: React.ReactNode 
     return (
         <div className="flex items-start w-full relative">
             {sidebar && <Sidebar account={account} />}
-            <div className="w-full h-[200svh] bg-gray-200">
+            <div className="w-full min-h-svh bg-gray-200">
                 <Navbar
                     account={account}
                     isFetchingAccount={isFetchAccount}

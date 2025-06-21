@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 type PropsInputForm = {
     title?: string;
     name: string;
-    value: string;
+    value: string | number;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     type?: HTMLInputTypeAttribute;
@@ -15,6 +15,9 @@ type PropsInputForm = {
     onFocus?: boolean;
     placeholder?: string;
     error?: string;
+    step?: number;
+    min?: number;
+    max?: number;
 };
 
 export function InputForm({
@@ -29,6 +32,9 @@ export function InputForm({
     onFocus,
     placeholder,
     error,
+    step,
+    max,
+    min,
 }: PropsInputForm) {
     return (
         <div className="w-full">
@@ -52,7 +58,11 @@ export function InputForm({
                     autoFocus={onFocus}
                     placeholder={placeholder}
                     disabled={disabled}
+                    step={step}
+                    min={min}
+                    max={max}
                 />
+                {type === "range" && <p className="text-xs text-end -mt-4">{value}</p>}
             </div>
             {error && (
                 <p className="text-red text-xs mt-1 flex items-center justify-start gap-2">

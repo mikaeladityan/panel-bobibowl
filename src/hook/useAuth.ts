@@ -108,16 +108,21 @@ export function useAuth() {
 }
 
 export const useRole = (allowedRoles: ROLE[]) => {
-    const { account } = useAccount();
+    const { account, isLoadingAccount } = useAccount();
     const router = useRouter();
     const setError = useSetAtom(errorAtom);
+    const pathname = usePathname();
 
     useEffect(() => {
+        const publicPaths = ["/login", "/register", "/forgot", "/reset"];
+        if (!isLoadingAccount && !account && !publicPaths.includes(pathname)) {
+            router.replace("/login");
+        }
         if (account && !allowedRoles.includes(account.role)) {
             setError({ message: "You don't have permission to access this page!" });
             router.replace("/");
         }
-    }, [account, allowedRoles, router, setError]);
+    }, [account, allowedRoles, router, setError, isLoadingAccount, pathname]);
 };
 
 export const useVerify = (email: string) => {

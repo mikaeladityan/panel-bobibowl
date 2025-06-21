@@ -1,10 +1,19 @@
 "use client";
-import { IconBell, IconMenu2, IconMessage, IconX, IconHome, IconChevronRight, IconLoader3 } from "@tabler/icons-react";
+import {
+    IconBell,
+    IconMenu2,
+    IconMessage,
+    IconX,
+    IconHome,
+    IconChevronRight,
+    IconLoader3,
+    IconChevronLeft,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { AccountResDTO } from "~/interface/account";
 import { ProfileMenu } from "./menu/profile.menu";
-import { Button } from "~/components/ui/button";
+
 import { useAtom } from "jotai";
 import { sidebarAtom } from "~/store";
 import { TextLoading } from "~/components/ui/loading/text.loading";
@@ -182,9 +191,13 @@ export function Navbar({ account, isFetchingAccount, isRefetchingAccount }: Prop
             <nav className="flex items-center justify-between gap-4 bg-white p-4 md:p-6 py-4 border-b border-gray-200 shadow-sm">
                 {/* Bagian kiri - Tombol sidebar dan sapaan */}
                 <div className="flex items-center justify-start gap-3 md:gap-5">
-                    <Button onClick={() => setSidebar(!sidebar)} className="h-9 w-9 md:h-10 md:w-10" type="button">
-                        <IconMenu2 size={20} stroke={2} />
-                    </Button>
+                    <button type="button" onClick={() => setSidebar(!sidebar)}>
+                        {sidebar ? (
+                            <IconChevronLeft size={25} stroke={2} className="text-red" />
+                        ) : (
+                            <IconMenu2 size={25} stroke={2} className="text-red" />
+                        )}
+                    </button>
                     <h6 className="text-red hidden md:block font-bold text-lg md:text-xl">
                         Hi,{" "}
                         <span className="capitalize">

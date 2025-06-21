@@ -49,9 +49,7 @@ export function NotificationAlert() {
                     </button>
                 </div>
 
-                <div className="px-4 py-3 text-gray-700">
-                    <p className="text-sm">{notification.message}</p>
-                </div>
+                <div className="px-4 py-3 text-gray-700 text-sm">{notification.message}</div>
 
                 {/* Progress bar */}
                 <div className="h-1 w-full bg-sky-200 overflow-hidden">

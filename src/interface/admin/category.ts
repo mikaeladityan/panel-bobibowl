@@ -5,6 +5,7 @@ export type CategoryReqDTO = {
 };
 
 export type CategoryResDTO = {
+    id: number;
     title: string;
     slug: string;
     description: string | null;
