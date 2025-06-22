@@ -26,6 +26,7 @@ export interface UserReqDTO {
 }
 
 export interface UserAddressReqDTO {
+    id?: number | string;
     name: string;
     street: string;
     district: string;

@@ -49,7 +49,7 @@ const sidebarMenu: Menu[] = [
     {
         icon: <IconUsers size={28} stroke={1.5} />,
         title: "Users",
-        link: "/admin/users",
+        link: "/users",
     },
     {
         icon: <IconLockAccess size={28} stroke={1.5} />,

@@ -24,5 +24,5 @@ type ImageSkeletonProps = {
 };
 
 export function ImageSkeleton({ className }: ImageSkeletonProps) {
-    return <div className={twMerge("bg-red animate-pulse rounded-xl", className)} />;
+    return <div className={twMerge("bg-gray-100 animate-ping rounded-xl", className)} />;
 }

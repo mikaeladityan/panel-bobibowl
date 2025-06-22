@@ -8,9 +8,9 @@ import React from "react";
 import { Sidebar } from "~/components/layout/sidebar";
 import { Navbar } from "~/components/layout/navbar";
 
-export default function AdminTemplate({ children }: { children: React.ReactNode }) {
+export default function UsersTemplate({ children }: { children: React.ReactNode }) {
     // const { isLogin } = useAuth();
-    useRole(["ADMIN", "DEVELOPER", "SUPER_ADMIN", "OWNER"]);
+    useRole(["OWNER", "DEVELOPER", "SUPER_ADMIN"]);
     const { account, isFetchAccount, isLoadingAccount, isRefetchingAccount } = useAccount();
 
     const [sidebar] = useAtom(sidebarAtom);

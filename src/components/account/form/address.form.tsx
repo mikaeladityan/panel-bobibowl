@@ -129,7 +129,7 @@ export function AddressForm({ addressId, createAddress, setCreateAddress, setSel
 
             <Button
                 type="button"
-                className="mt-5 bg-red"
+                className="mt-5 bg-red text-yellow"
                 onClick={() => {
                     setSelectAddressId(null);
                     setCreateAddress(!createAddress);
@@ -138,13 +138,7 @@ export function AddressForm({ addressId, createAddress, setCreateAddress, setSel
                 Cancel
             </Button>
             <Button type="submit" className="mt-5" disabled={isPendingCreateAddress || isPendingUpdateAddress}>
-                {isPendingCreateAddress || isPendingUpdateAddress ? (
-                    <ButtonLoader />
-                ) : addressId ? (
-                    "Memperbarui"
-                ) : (
-                    "Simpan"
-                )}
+                {isPendingCreateAddress || isPendingUpdateAddress ? <ButtonLoader /> : addressId ? "Updated" : "Save"}
             </Button>
         </form>
     );

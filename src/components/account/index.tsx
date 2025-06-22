@@ -105,7 +105,7 @@ export function Account() {
                                                             <IconTrash size={16} stroke={2} />
                                                         </Button>
                                                         <Button
-                                                            className="p-0 flex items-center bg-sky-800 justify-center w-7 h-7"
+                                                            className="p-0 flex items-center bg-sky-800 text-white justify-center w-7 h-7"
                                                             type="button"
                                                             onClick={() => {
                                                                 setSelectAddressId(add.id); // Set addressId yang diedit
