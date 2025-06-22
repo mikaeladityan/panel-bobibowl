@@ -33,7 +33,7 @@ const sidebarMenu: Menu[] = [
     },
     {
         icon: <IconSpeakerphone size={28} stroke={1.5} />,
-        title: "Promotion",
+        title: "Promotions",
         link: "/admin/promotions",
     },
     {

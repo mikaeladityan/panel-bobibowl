@@ -13,7 +13,7 @@ export function Button({ children, type = "button", className, disabled, onClick
         <button
             type={type}
             className={twMerge(
-                "w-full px-5 bg-red text-gray-100 font-bold text-sm text-center py-2.5 rounded-lg uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed",
+                "w-full px-5 bg-yellow text-red font-bold text-sm text-center py-2.5 rounded-lg uppercase flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed",
                 className
             )}
             disabled={disabled}

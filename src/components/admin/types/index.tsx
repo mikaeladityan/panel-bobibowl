@@ -40,7 +40,10 @@ export function AdminType() {
                             <Button
                                 type="button"
                                 onClick={handleClean}
-                                className={twMerge("w-fit px-2 py-2", content === "DELETED" && "bg-sky-800")}
+                                className={twMerge(
+                                    "w-fit px-2 py-2 text-gray-50",
+                                    content === "DELETED" && "bg-sky-800"
+                                )}
                             >
                                 {isPendingClean ? (
                                     <ButtonLoader />
@@ -54,7 +57,7 @@ export function AdminType() {
                         <Button
                             type="button"
                             onClick={() => setContent(content === "ACTIVED" ? "DELETED" : "ACTIVED")}
-                            className={twMerge("w-fit px-2 py-2", content === "DELETED" && "bg-sky-800")}
+                            className={twMerge("w-fit px-2 py-2", content === "DELETED" && "bg-sky-800 text-gray-50")}
                         >
                             {content === "ACTIVED" ? <IconTrash size={18} /> : <IconActivity size={18} />}
                         </Button>

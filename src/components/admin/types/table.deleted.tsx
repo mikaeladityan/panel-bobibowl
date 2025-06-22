@@ -56,7 +56,7 @@ export function TypeTableDeleted({ search }: { search: string }) {
                                       {formatDate(String(t.deleted_at))}
                                   </td>
                                   <td className="px-4 py-3 flex items-center justify-center space-x-2">
-                                      <Button type="button" className="px-2 w-fit py-2 bg-blue-800">
+                                      <Button type="button" className="px-2 w-fit py-2 bg-blue-800 text-gray-50">
                                           <IconCheck
                                               size={16}
                                               onClick={() => {
@@ -71,7 +71,7 @@ export function TypeTableDeleted({ search }: { search: string }) {
 
                     {!isLoadingTypeDeleted && filtered?.length === 0 && (
                         <tr>
-                            <td colSpan={3} className="px-4 py-6 text-center text-sm text-gray-500">
+                            <td colSpan={4} className="px-4 py-6 text-center text-sm text-gray-500">
                                 No types found.
                             </td>
                         </tr>

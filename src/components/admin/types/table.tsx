@@ -58,7 +58,7 @@ export function TypeTable({
                                       <Button
                                           onClick={() => setUpdated(t.slug)}
                                           type="button"
-                                          className="px-2 w-fit bg-sky-800 py-2"
+                                          className="px-2 w-fit bg-sky-800 py-2 text-gray-50"
                                       >
                                           <IconEye size={16} />
                                       </Button>

@@ -57,7 +57,7 @@ export function CategoryTableDeleted({ search }: { search: string }) {
                                       {formatDate(String(t.deleted_at))}
                                   </td>
                                   <td className="px-4 py-3 flex items-center justify-center space-x-2">
-                                      <Button type="button" className="px-2 w-fit py-2 bg-blue-800">
+                                      <Button type="button" className="px-2 w-fit py-2 bg-blue-800 text-gray-50">
                                           <IconCheck
                                               size={16}
                                               onClick={() => {

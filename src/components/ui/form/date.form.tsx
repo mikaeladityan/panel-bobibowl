@@ -3,10 +3,10 @@ import { IconAlertCircle } from "@tabler/icons-react";
 import { ChangeEvent, HTMLInputTypeAttribute } from "react";
 import { twMerge } from "tailwind-merge";
 
-type PropsInputForm = {
+type PropsDateForm = {
     title?: string;
     name: string;
-    value: string | number | null;
+    value: Date | string | null;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     type?: HTMLInputTypeAttribute;
@@ -20,13 +20,12 @@ type PropsInputForm = {
     max?: number;
 };
 
-export function InputForm({
+export function DateForm({
     title,
     name,
     value,
     onChange,
     className,
-    type = "text",
     disabled,
     required,
     onFocus,
@@ -35,7 +34,7 @@ export function InputForm({
     step,
     max,
     min,
-}: PropsInputForm) {
+}: PropsDateForm) {
     return (
         <div className="w-full">
             <label htmlFor={name} className="text-xs font-bold uppercase text-gray-700">
@@ -49,10 +48,10 @@ export function InputForm({
                 )}
             >
                 <input
-                    type={type}
+                    type={"date"}
                     className="bg-gray-100 px-3 py-2 text-sm text-black placeholder:text-black/30 outline-none w-full disabled:opacity-60 disabled:cursor-not-allowed"
                     name={name}
-                    value={value ? value : ""}
+                    value={value?.toString()}
                     onChange={onChange}
                     required={required}
                     autoFocus={onFocus}
@@ -62,7 +61,6 @@ export function InputForm({
                     min={min}
                     max={max}
                 />
-                {type === "range" && <p className="text-xs text-end -mt-4">{value}</p>}
             </div>
             {error && (
                 <p className="text-red text-xs mt-1 flex items-center justify-start gap-2">
