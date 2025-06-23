@@ -72,7 +72,14 @@ export function Promotions() {
                 </div>
             </div>
 
-            <div className={twMerge("grid gap-5", sidebar ? "grid-cols-3" : "grid-cols-4")}>
+            <div
+                className={twMerge(
+                    "grid gap-5",
+                    sidebar
+                        ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
+                        : "grid-cols-1 lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4"
+                )}
+            >
                 {isRefetchingPromotions ? (
                     <ComponentLoading isLoading={isLoadingPromotions} />
                 ) : promotions?.length === 0 ? (

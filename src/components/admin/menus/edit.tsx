@@ -64,7 +64,7 @@ export function EditMenu() {
                 <ComponentLoading isLoading={isPendingUpdate || isLoadingMenu || isPendingImage || loading} />
             ) : (
                 <section className="w-11/12 mx-auto my-10 flex flex-col gap-y-5">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-col lg:flex-row items-center justify-between">
                         <h1 className="text-2xl font-semibold w-full">Update Menu {menu?.barcode}</h1>
                         <Button
                             type="button"
@@ -72,7 +72,7 @@ export function EditMenu() {
                                 setLoading(true);
                                 router.replace("/admin/menus");
                             }}
-                            className="bg-red text-yellow w-fit"
+                            className="bg-red text-yellow w-full lg:w-fit"
                         >
                             {loading ? (
                                 <ButtonLoader />

@@ -32,7 +32,7 @@ export default function AccountTemplate({ children }: { children: React.ReactNod
                     isFetchingAccount={isFetchAccount}
                     isRefetchingAccount={isRefetchingAccount}
                 />
-                <main className="p-5">{children}</main>
+                <main className="p-0 md:p-5">{children}</main>
             </div>
         </div>
     );

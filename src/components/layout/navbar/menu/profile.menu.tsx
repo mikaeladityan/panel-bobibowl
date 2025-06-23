@@ -1,5 +1,5 @@
 "use client";
-import { IconPower, IconShoppingBag, IconUser } from "@tabler/icons-react";
+import { IconPower, IconUser } from "@tabler/icons-react";
 import { SetStateAction } from "jotai";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -12,11 +12,6 @@ export const profileMenu: Array<Menu> = [
         title: "My Account",
         link: "/account",
         icon: <IconUser size={24} stroke={2} />,
-    },
-    {
-        title: "Cart",
-        link: "/cart",
-        icon: <IconShoppingBag size={24} stroke={2} />,
     },
 ];
 export function ProfileMenu({
@@ -48,7 +43,7 @@ export function ProfileMenu({
                         </button>
                     ))}
                     <button
-                        className="px-2 py-3 border-b border-gray-300 flex items-center justify-start gap-2 cursor-pointer bg-red hover:bg-red-200 hover:text-red transition-all ease-in-out duration-200 font-medium text-sm text-yellow"
+                        className="px-2 py-3 border-b border-gray-300 flex items-center justify-start gap-2 cursor-pointer bg-red hover:bg-yellow hover:text-red transition-all ease-in-out duration-200 font-medium text-sm text-yellow"
                         type="button"
                         onClick={logout}
                     >

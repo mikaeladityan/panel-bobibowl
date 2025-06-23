@@ -2,7 +2,7 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 export const Brand = ({ className }: { className?: string }) => (
-    <Link href={"/"} className="w-fit">
+    <Link href={process.env.NEXT_PUBLIC_HOME!} className="w-fit">
         <div className={twMerge("font-bold text-xl leading-5 text-red", className)}>
             Bobi Bowl
             <br />

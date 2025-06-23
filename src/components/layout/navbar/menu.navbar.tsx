@@ -1,6 +1,6 @@
 "use client";
 
-import { IconArticle, IconHome2, IconLogin2, IconQuestionMark, IconShoppingBag } from "@tabler/icons-react";
+import { IconArticle, IconHome2, IconLogin2 } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "~/interface";
@@ -11,16 +11,16 @@ export const dataMenu: Array<Menu> = [
         link: process.env.NEXT_PUBLIC_HOME!,
         icon: <IconHome2 size={24} stroke={2} />,
     },
-    {
-        title: "Cara Kerja",
-        link: "/care-kerja",
-        icon: <IconQuestionMark size={24} stroke={2} />,
-    },
-    {
-        title: "Keranjang",
-        link: "/cart",
-        icon: <IconShoppingBag size={24} stroke={2} />,
-    },
+    // {
+    //     title: "Cara Kerja",
+    //     link: "/care-kerja",
+    //     icon: <IconQuestionMark size={24} stroke={2} />,
+    // },
+    // {
+    //     title: "Keranjang",
+    //     link: "/cart",
+    //     icon: <IconShoppingBag size={24} stroke={2} />,
+    // },
     {
         title: "Artikel",
         link: "/artikel",

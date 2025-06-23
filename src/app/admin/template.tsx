@@ -28,7 +28,7 @@ export default function AdminTemplate({ children }: { children: React.ReactNode 
                     isFetchingAccount={isFetchAccount}
                     isRefetchingAccount={isRefetchingAccount}
                 />
-                <main className="p-5">{children}</main>
+                <main className="p-3 md:p-5">{children}</main>
             </div>
         </div>
     );
