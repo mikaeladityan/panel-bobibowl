@@ -96,13 +96,36 @@ export function useAuth() {
 
     useEffect(() => {
         const publicPaths = ["/login", "/register", "/forgot", "/reset"];
-        if (!isLoadingAccount && !account && !publicPaths.includes(pathname)) {
+        const isPublic = publicPaths.includes(pathname);
+
+        // 1. Belum berhasil load akun: tunggu saja
+        if (isLoadingAccount) return;
+
+        // 2. Jika belum login dan bukan halaman publik ➔ ke /login
+        if (!account && !isPublic) {
             router.replace("/login");
+            return;
         }
-        if (!isLoadingAccount && account && pathname === "/login") {
-            router.replace("/");
+
+        // 3. Jika sudah login...
+        if (account) {
+            const needsProfile = account.user.firstName.trim() === "";
+
+            // 3a. Profile belum lengkap ➔ wajib di /account
+            if (needsProfile) {
+                if (pathname !== "/account") {
+                    router.replace("/account");
+                }
+                return;
+            }
+
+            // 3b. Profile lengkap
+            // - Jika masih di /login atau /account ➔ pindah ke root
+            if (pathname === "/login") {
+                router.replace("/");
+            }
         }
-    }, [account, isLoadingAccount, router, pathname]);
+    }, [account, isLoadingAccount, pathname, router]);
 
     return { isLoadingAccount, isLogin: Boolean(account) };
 }
