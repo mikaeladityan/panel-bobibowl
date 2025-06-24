@@ -25,8 +25,10 @@ export class AuthService {
     }
 
     static async login(body: LoginDTO) {
-        await setupCSRFToken();
-        await api.post("/auth", body);
+        const res = await api.get("/csrf");
+        console.log(res);
+        console.log(body);
+        // await api.post("/auth", body);
     }
 
     static async logout() {
