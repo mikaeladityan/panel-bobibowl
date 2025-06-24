@@ -11,12 +11,13 @@ type propsAccountForm = {
 };
 export function AccountForm({ userAccount, userAccountLoading }: propsAccountForm) {
     const { submitUpdateAccount } = useUpdateAccount();
-    const [body, setBody] = useState<UserReqDTO>({
+    const [body, setBody] = useState<UserReqDTO & { email: string }>({
         firstName: userAccount?.user.firstName || "",
         lastName: userAccount?.user.lastName || "",
         phone: userAccount?.user.phone || "",
         whatsapp: userAccount?.user.whatsapp || "",
         photo: "",
+        email: userAccount?.email || "",
         address: initUserReq["address"],
     });
     const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,20 +57,20 @@ export function AccountForm({ userAccount, userAccountLoading }: propsAccountFor
                 type="tel"
                 name="whatsapp"
                 value={body.whatsapp}
-                placeholder="085XXXXXXXXXX"
+                placeholder="05XXXXXXXX"
                 className="w-full"
                 onChange={inputChange}
                 disabled={userAccountLoading}
             />
             <InputForm
-                title="Telphone"
-                type="tel"
-                name="phone"
-                value={body.phone}
-                placeholder="085XXXXXXXXXX"
+                title="email"
+                type="email"
+                name="email"
+                value={userAccount?.email || ""}
+                placeholder="jhon.doe@mail.com"
                 className="w-full"
                 onChange={inputChange}
-                disabled={userAccountLoading}
+                disabled
             />
 
             <Button disabled={userAccountLoading} type="submit" className="mt-5 col-span-2">
