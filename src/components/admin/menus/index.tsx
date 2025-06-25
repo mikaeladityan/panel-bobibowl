@@ -84,7 +84,7 @@ export function Menus() {
             {/* Header */}
             <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold text-gray-800 w-full text-start lg:text-start">Menus Management</h1>
-                <div className="flex flex-col lg:flew-row items-start w-full lg:w-fit lg:items-center justify-start lg:justify-end gap-y-1 lg:gap-5">
+                <div className="flex flex-col lg:flex-row items-start w-full lg:w-fit lg:items-center justify-start lg:justify-end gap-y-1 lg:gap-5">
                     <Button
                         type="button"
                         onClick={goToTrash}
