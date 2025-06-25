@@ -79,8 +79,10 @@ export function useMenuForm(barcode?: string, setBarcodeSelect?: React.Dispatch<
         mutationKey: ["menu", "image"],
         mutationFn: ({ barcode, file }) => MenuService.image(barcode, file),
         onSuccess: () => {
-            notification({ title: "Create New Menu", message: "Successfully created new menu" });
             queryClient.invalidateQueries({ queryKey: ["menus"] });
+            queryClient.invalidateQueries({ queryKey: ["menu", barcode] });
+
+            notification({ title: "Create New Menu", message: "Successfully created new menu" });
         },
         onError: (err) => {
             fetchError(err, setError);
@@ -92,9 +94,9 @@ export function useMenuForm(barcode?: string, setBarcodeSelect?: React.Dispatch<
         mutationKey: ["menu", "update"],
         mutationFn: (body) => MenuService.update(body),
         onSuccess: () => {
-            notification({ title: "Update Menu", message: "Successfully update new menu" });
             queryClient.invalidateQueries({ queryKey: ["menus"] });
             queryClient.invalidateQueries({ queryKey: ["menu", barcode] });
+            notification({ title: "Update Menu", message: "Successfully update new menu" });
         },
         onError: (err) => {
             fetchError(err, setError);

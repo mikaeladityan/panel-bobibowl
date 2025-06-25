@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
                 pathname: "/**", // Sesuaikan dengan path gambar Anda
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: "img1.wsimg.com",
+                pathname: "/**", // Sesuaikan dengan path gambar Anda
+                port: "",
+            },
         ],
     },
 };
